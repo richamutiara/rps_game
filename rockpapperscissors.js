@@ -8,44 +8,41 @@ function getComputerChoice() {
 let pointComputer = 0;
 let pointPlayer = 0;
 let playGame = 5;
+let playerSelection = "";
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === "scissors" && computerSelection === "paper") {
-    console.log(`You Win! ${playerSelection} beats ${computerSelection}`);
+    resultGame.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
     pointPlayer++;
   } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    console.log(`You lose! ${computerSelection} beats ${playerSelection}  `);
+    resultGame.textContent = `You lose! ${computerSelection} beats ${playerSelection}  `;
     pointComputer++;
   } else if (playerSelection === "rock" && computerSelection === "paper") {
-    console.log(`You lose! ${computerSelection} beats ${playerSelection}  `);
+    resultGame.textContent = `You lose! ${computerSelection} beats ${playerSelection}  `;
     pointComputer++;
   } else if (playerSelection === "rock" && computerSelection === "scissors") {
-    console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+    resultGame.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
     pointPlayer++;
   } else if (playerSelection === "paper" && computerSelection === "rock") {
-    console.log(`You win! ${playerSelection} beats ${computerSelection}`);
+    resultGame.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
     pointPlayer++;
   } else if (playerSelection === "paper" && computerSelection === "scissors") {
-    console.log(`You lose! ${computerSelection} beats ${playerSelection}  `);
+    resultGame.textContent = `You lose! ${computerSelection} beats ${playerSelection}  `;
     pointComputer++;
   } else {
-    console.log(`Draw! ${computerSelection} vs ${playerSelection}`);
+    resultGame.textContent = `Draw! No one get score`;
   }
 }
 
-function game() {
-  for (let i = 0; i < playGame; i++) {
-    let playerInput = prompt("what your choice? (just paper/rock/scissors)");
-    let playerSelection = playerInput.toLowerCase();
+const btn = document.querySelectorAll("button");
+
+btn.forEach((button) => {
+  button.addEventListener("click", () => {
+    playerSelection = button.id;
     const computerSelection = getComputerChoice();
+    console.log(computerSelection);
     playRound(playerSelection, computerSelection);
-  }
+  });
+});
 
-  if (pointPlayer > pointComputer) {
-    console.log(`You Win! your score ${pointPlayer} and ${pointComputer}`);
-  } else {
-    console.log(`You Lose! your score ${pointPlayer} and ${pointComputer}`);
-  }
-}
-
-game();
+const resultGame = document.querySelector(".result");
