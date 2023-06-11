@@ -7,42 +7,70 @@ function getComputerChoice() {
 
 let pointComputer = 0;
 let pointPlayer = 0;
-let playGame = 5;
-let playerSelection = "";
 
-function playRound(playerSelection, computerSelection) {
-  if (playerSelection === "scissors" && computerSelection === "paper") {
-    resultGame.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
+function playRound(playerChoice, computerSelection) {
+  if (playerChoice === "scissors" && computerSelection === "paper") {
+    resultGame.textContent = `You Win! ${playerChoice} beats ${computerSelection}`;
     pointPlayer++;
-  } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    resultGame.textContent = `You lose! ${computerSelection} beats ${playerSelection}  `;
+    playerPoints.textContent = `${pointPlayer}`;
+    computerPoints.textContent = `${pointComputer}`;
+  } else if (playerChoice === "scissors" && computerSelection === "rock") {
+    resultGame.textContent = `You lose! ${computerSelection} beats ${playerChoice}  `;
     pointComputer++;
-  } else if (playerSelection === "rock" && computerSelection === "paper") {
-    resultGame.textContent = `You lose! ${computerSelection} beats ${playerSelection}  `;
+    playerPoints.textContent = `${pointPlayer}`;
+    computerPoints.textContent = `${pointComputer}`;
+  } else if (playerChoice === "rock" && computerSelection === "paper") {
+    resultGame.textContent = `You lose! ${computerSelection} beats ${playerChoice}  `;
     pointComputer++;
-  } else if (playerSelection === "rock" && computerSelection === "scissors") {
-    resultGame.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
+    playerPoints.textContent = `${pointPlayer}`;
+    computerPoints.textContent = `${pointComputer}`;
+  } else if (playerChoice === "rock" && computerSelection === "scissors") {
+    resultGame.textContent = `You win! ${playerChoice} beats ${computerSelection}`;
     pointPlayer++;
-  } else if (playerSelection === "paper" && computerSelection === "rock") {
-    resultGame.textContent = `You win! ${playerSelection} beats ${computerSelection}`;
+    playerPoints.textContent = `${pointPlayer}`;
+    computerPoints.textContent = `${pointComputer}`;
+    playerPoints.textContent = `${pointPlayer}`;
+  } else if (playerChoice === "paper" && computerSelection === "rock") {
+    resultGame.textContent = `You win! ${playerChoice} beats ${computerSelection}`;
     pointPlayer++;
-  } else if (playerSelection === "paper" && computerSelection === "scissors") {
-    resultGame.textContent = `You lose! ${computerSelection} beats ${playerSelection}  `;
+    playerPoints.textContent = `${pointPlayer}`;
+    computerPoints.textContent = `${pointComputer}`;
+  } else if (playerChoice === "paper" && computerSelection === "scissors") {
+    resultGame.textContent = `You lose! ${computerSelection} beats ${playerChoice}  `;
     pointComputer++;
+    playerPoints.textContent = `${pointPlayer}`;
+    computerPoints.textContent = `${pointComputer}`;
   } else {
     resultGame.textContent = `Draw! No one get score`;
+    playerPoints.textContent = `${pointPlayer}`;
+    computerPoints.textContent = `${pointComputer}`;
   }
 }
 
-const btn = document.querySelectorAll("button");
+function theWinner(playerChoice, computerChoice) {
+  if (pointPlayer === 5 || pointComputer === 5) {
+    return playRound;
+  }
 
-btn.forEach((button) => {
+  playRound(playerChoice, computerChoice);
+  if (pointPlayer === 5) {
+    resultPoint.textContent = `You Win! Your score ${pointPlayer} and the computer ${pointComputer}`;
+  } else if (pointComputer === 5) {
+    resultPoint.textContent = `You Lose! Your score ${pointPlayer} and the computer ${pointComputer}`;
+  }
+}
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    playerSelection = button.id;
+    const playerSelection = button.id;
     const computerSelection = getComputerChoice();
     console.log(computerSelection);
-    playRound(playerSelection, computerSelection);
+    theWinner(playerSelection, computerSelection);
   });
 });
 
-const resultGame = document.querySelector(".result");
+const resultGame = document.querySelector(".informResult");
+const resultPoint = document.querySelector(".pointMatch");
+const playerPoints = document.querySelector("#playerPoint");
+const computerPoints = document.querySelector("#computerPoint");
