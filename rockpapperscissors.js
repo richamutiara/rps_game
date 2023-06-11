@@ -49,7 +49,7 @@ function playRound(playerChoice, computerSelection) {
 
 function theWinner(playerChoice, computerChoice) {
   if (pointPlayer === 5 || pointComputer === 5) {
-    return playRound;
+    return;
   }
 
   playRound(playerChoice, computerChoice);
