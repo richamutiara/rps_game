@@ -54,9 +54,9 @@ function theWinner(playerChoice, computerChoice) {
 
   playRound(playerChoice, computerChoice);
   if (pointPlayer === 5) {
-    resultPoint.textContent = `You Win! Your score ${pointPlayer} and the computer ${pointComputer}`;
+    resultGame.textContent = `You Win! Your score ${pointPlayer} and the computer ${pointComputer}`;
   } else if (pointComputer === 5) {
-    resultPoint.textContent = `You Lose! Your score ${pointPlayer} and the computer ${pointComputer}`;
+    resultGame.textContent = `You Lose! Your score ${pointPlayer} and the computer ${pointComputer}`;
   }
 }
 
@@ -71,6 +71,5 @@ buttons.forEach((button) => {
 });
 
 const resultGame = document.querySelector(".informResult");
-const resultPoint = document.querySelector(".pointMatch");
 const playerPoints = document.querySelector("#playerPoint");
 const computerPoints = document.querySelector("#computerPoint");
